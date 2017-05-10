@@ -27,3 +27,31 @@ test('getUsers gets a single user', function (t) {
       t.is(expected, actual)
     })
 })
+
+
+test('getProfile gets a profile', function (t) {
+  var expected = 'Fascinated Flying Fox'
+  return db.getProfile(99906, t.context.connection)
+    .then(function (result) {
+      var actual = result[0].name
+      t.is(expected, actual)
+    })
+})
+
+test('addUser adds a user', function (t) {
+  var newAnimal = {
+    name: "Lovely Lemur",
+    email: "lemur@hotmail.com",
+    snack: "Caterpillars",
+    habitat: "Madagascar",
+    image: "lemur.jpg",
+    user_id: ""
+  }
+
+  var expected = 27
+  return db.addUser(newAnimal, t.context.connection )
+    .then(function (result) {
+      var actual = result[0]
+      t.is(actual, expected)
+    })
+})

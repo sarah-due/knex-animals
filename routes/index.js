@@ -14,7 +14,7 @@ router.get('/', function (req, res) {
 })
 
 router.get('/view_animal/:id', function (req, res) {
-  console.log('You found the route!');
+  console.log('You found the');
   db.getProfile(req.params.id, req.app.get('connection'))
     .then(function (profile) {
       console.log(profile);
@@ -26,7 +26,12 @@ router.get('/admin', function (req, res) {
   res.render('admin')
 })
 
-
+router.post('/admin', (req, res) => {
+  db.addUser(req.body, req.app.get('connection'))
+  .then(function(result) {
+    res.redirect('/')
+  })
+})
 
 
 

@@ -2,7 +2,8 @@
 module.exports = {
   getUser,
   getUsers,
-  getProfile
+  getProfile,
+  addUser
 }
 
 function getUsers (connection) {
@@ -18,3 +19,13 @@ function getProfile (id, connection) {
     .join('users', 'profiles.user_id','users.id')
     .where('users.id', id)
 }
+
+function addUser (data, connection) {
+  return connection('users')
+    .insert({name: data.name, email: data.email})
+    .then( (users_id) => {
+      console.log(users_id)
+      return connection('profiles')
+      .insert({user_id: users_id[0], snack: data.snack, habitat: data.habitat, image: data.image})
+    })
+  }
