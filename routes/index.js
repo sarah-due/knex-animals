@@ -22,4 +22,12 @@ router.get('/view_animal/:id', function (req, res) {
     })
 })
 
+router.get('/admin', function (req, res) {
+  res.render('admin')
+})
+
+
+
+
+
 module.exports = router
