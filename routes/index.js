@@ -13,4 +13,13 @@ router.get('/', function (req, res) {
     })
 })
 
+router.get('/view_animal/:id', function (req, res) {
+  console.log('You found the route!');
+  db.getProfile(req.params.id, req.app.get('connection'))
+    .then(function (profile) {
+      console.log(profile);
+      res.render('view_animal', profile[0])
+    })
+})
+
 module.exports = router
