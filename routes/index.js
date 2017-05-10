@@ -14,10 +14,8 @@ router.get('/', function (req, res) {
 })
 
 router.get('/view_animal/:id', function (req, res) {
-  console.log('You found the');
   db.getProfile(req.params.id, req.app.get('connection'))
     .then(function (profile) {
-      console.log(profile);
       res.render('view_animal', profile[0])
     })
 })
@@ -33,6 +31,13 @@ router.post('/admin', (req, res) => {
   })
 })
 
+router.get('/blog/:id', function (req, res) {
+  db.getBlog(req.params.id, req.app.get('connection'))
+    .then(function (blog) {
+      console.log(blog)
+      res.render('read_blog', blog[0])
+    })
+})
 
 
 module.exports = router

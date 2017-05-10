@@ -3,7 +3,8 @@ module.exports = {
   getUser,
   getUsers,
   getProfile,
-  addUser
+  addUser,
+  getBlog
 }
 
 function getUsers (connection) {
@@ -17,6 +18,12 @@ function getUser (id, connection) {
 function getProfile (id, connection) {
   return connection('profiles')
     .join('users', 'profiles.user_id','users.id')
+    .where('users.id', id)
+}
+
+function getBlog (id, connection) {
+  return connection('blogs')
+    .join('users', 'blogs.user_id','users.id')
     .where('users.id', id)
 }
 
